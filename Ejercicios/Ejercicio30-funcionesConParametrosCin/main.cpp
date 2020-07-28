@@ -23,9 +23,9 @@ int main(int argc, char const *argv[])
     cin >> numero2;
 
     cout << endl;
-    cout << "El resultado de la suma es: "sumar(numero1, numero2);
+    cout << "El resultado de la suma es:" << sumar (numero1, numero2);
      cout << endl;
-    cout << "El resultado de la resta es: "restar(numero1, numero2);
+    cout << "El resultado de la resta es:" << restar (numero1, numero2);
 
     return 0;
 }
