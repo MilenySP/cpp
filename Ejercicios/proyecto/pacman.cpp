@@ -3,6 +3,7 @@
 #include <conio.h> 
 #include <time.h>
 #include <math.h>
+#include "pacman.h"
 
 #define UP     	72  
 #define DOWN    80
@@ -38,8 +39,6 @@ int color[8] = {
     9 ,	
     7		
 };
-
-char soundPacManInicio[] = "C:/Users/Marcos/Desktop/Proyecto 2 Pac Man/Pac-Man Start.wav" ; 
 
 
 void gotoxy(int x,int y){  
@@ -914,7 +913,7 @@ main()
 			randomClyde(movClydeAux, movClyde);
 		
 			gotoxy(0,0);
-cout<<((LPCSTR)soundPacManInicio,NULL, SND_FILENAME | SND_ASYNC ); 
+            cout<<((LPCSTR)NULL, SND_FILENAME | SND_ASYNC ); 
 			gotoxy(0,0);
 			cout<<" ";
 			Sleep(4700);
