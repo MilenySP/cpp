@@ -29,6 +29,9 @@ while (salir == false){
         case 1:
             //snake();
             break;
+        case 2:
+            //pacman();
+            break;
         case 5:
             salir;
             break;

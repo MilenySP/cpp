@@ -28,25 +28,20 @@ int  nivel   = 1;
 char tecla;
 char opcion;
 char respuesta = 's';
-
-//Vector con los colores a utilizar en el programa
 int color[8] = {
-    14, 	//[0]	Color PacMan 	(Amarillo)
-    12, 	//[1]	Color Blinky 	(Rojo)
-    13, 	//[2]	Color Pinky		(Rosado)
-    10, 	//[3]	Color Inky		(Verde)
-    11, 	//[4]	Color Clyde		(Azul Claro)
-    15, 	//[5]	Color 			(Blanco Brillante)
-    9 ,		//[6]	Color Mapa		(Azul)
-    7		//[7]	Color Monedas	(Blanco Palido)
+    14, 	
+    12, 	
+    13, 	
+    10, 	
+    11, 	
+    15, 	
+    9 ,	
+    7		
 };
-
-/*========================================= VARIABLES DE SONIDO   =========================================   */
 
 char soundPacManInicio[] = "C:/Users/Marcos/Desktop/Proyecto 2 Pac Man/Pac-Man Start.wav" ; 
 
 
-//Funcion para usar gotoxy
 void gotoxy(int x,int y){  
 	HANDLE hCon;
 	
@@ -57,27 +52,20 @@ void gotoxy(int x,int y){
     SetConsoleCursorPosition(hCon,dwPos);  
 } 
 
-//Funcion para eliminar el cursor de la ventaja de ejecucion
 void ocultarCursor(){
 	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);  
 	COORD dwPos; 
 	CONSOLE_CURSOR_INFO cci;
 	cci.dwSize =100;
-	cci.bVisible= FALSE;	//EL FALSE hace que no se vea, con TRUE se vera con el tamano que indique dwSize
+	cci.bVisible= FALSE;	
 	SetConsoleCursorInfo(hcon,&cci);
 }
 
-//Funcion para definir colores (pasando como parametro el vector "color")
 void setColor(int color)
 {
 	SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE),color);
 }
 
-
-/*=====================================  MATRICES DE MENU  =====================================*/
-
-
-/*===========  MATRIZ PAC-MAN   =========== */	   //Ubicada en Menu Principal
 char titulo[6][43] = {
 "PPPPP PPPPP PPPPPO      P   P PPPPP P   P",
 "P   P P   P P PP        PP PP P   P PP  P",
@@ -86,7 +74,6 @@ char titulo[6][43] = {
 "P     P   P PPPPPQ      P   P P   P P   P"  
 }; 
 
-/*===========  MATRIZ FANTASMAS   =========== */   //Ubicada en Menu Principal
 char tituloFantasmas[4][35] = {
 " aXXXa    eWWWe    gTTTg    iUUUi ",
 "aXdcXdc  eWdcWdc  gTdcTdc  iUdcUdc",
@@ -94,7 +81,6 @@ char tituloFantasmas[4][35] = {
 "XbXbXbX  WfWfWfW  ThThThT  UjUjUjU"
 };
 
-/*==============  MATRIZ TECLADO  ============== */   //Ubicada en AYUDA
 char teclado[6][22] = {
 "      a---b     ",
 "      I e I     ",
@@ -104,7 +90,6 @@ char teclado[6][22] = {
 "c---d c---d c---d"
 };
 
-/*========  MATRIZ FANTASMAS AZULES  ========= */  //Ubicada en CREDITOS
 char fantasmasAzules[4][35] = {
 " cYYYc             aXXXa    aXXXa ",
 "YYYd       ee     aXaXaXa  aXaXaXa",
@@ -112,8 +97,6 @@ char fantasmasAzules[4][35] = {
 " dYYYd            XbXbXbX  XbXbXbX"
 };
 
-
-//Funcion para LLENAR MATRIZ TITULO PACMAN (titulo en el menu)
 void llenarTitulo()
 {
 	for(int i=0; i<43; i++)
@@ -128,8 +111,6 @@ void llenarTitulo()
 		}
 	}
 }
-
-//Funcion para LLENAR MATRIZ FANTASMAS (en el menu)
 void llenarFantasmas()
 {
 	for(int i=0; i<35; i++)
@@ -138,27 +119,22 @@ void llenarFantasmas()
 		{
 			gotoxy(14+i,25+j);
 			
-			//Blinky
 			if		(tituloFantasmas[j][i]=='X')	{setColor(color[1]); cout<<char(219);}
 			else if	(tituloFantasmas[j][i]=='a')	{setColor(color[1]); cout<<char(220);}
 			else if	(tituloFantasmas[j][i]=='b')	{setColor(color[1]); cout<<char(223);}
 			
-			//Pinky
 			else if	(tituloFantasmas[j][i]=='W')	{setColor(color[2]); cout<<char(219);}
 			else if	(tituloFantasmas[j][i]=='e')	{setColor(color[2]); cout<<char(220);}
 			else if	(tituloFantasmas[j][i]=='f')	{setColor(color[2]); cout<<char(223);}
 			
-			//Clyde
 			else if	(tituloFantasmas[j][i]=='T')	{setColor(color[4]); cout<<char(219);}
 			else if	(tituloFantasmas[j][i]=='g')	{setColor(color[4]); cout<<char(220);}
 			else if	(tituloFantasmas[j][i]=='h')	{setColor(color[4]); cout<<char(223);}
 			
-			//Inky
 			else if	(tituloFantasmas[j][i]=='U')	{setColor(color[3]); cout<<char(219);}
 			else if	(tituloFantasmas[j][i]=='i')	{setColor(color[3]); cout<<char(220);}
 			else if	(tituloFantasmas[j][i]=='j')	{setColor(color[3]); cout<<char(223);}
 			
-			//Ojos
 			else if	(tituloFantasmas[j][i]=='c')	{setColor(color[5]); cout<<char(223);}
 			else if	(tituloFantasmas[j][i]=='d')	{setColor(color[5]); cout<<char(219);}
 			
@@ -166,8 +142,6 @@ void llenarFantasmas()
 		}
 	}
 }	
-
-//Funcion para LLENAR MATRIZ TECLADOo (teclas en Ayuda)
 void llenarTeclado()
 {
 	
@@ -190,8 +164,6 @@ void llenarTeclado()
 		}
 	}
 }
-
-//Funcion para LLENAR MATRIZ FANTASMAS AZULES 
 void llenarFantasmasAzules()
 {
 
@@ -201,17 +173,14 @@ void llenarFantasmasAzules()
 		{
 			gotoxy(14+i,30+j);
 			
-			//Fantasmas
 			if		(fantasmasAzules[j][i]=='X')	{setColor(color[6]); cout<<char(219);}
 			else if	(fantasmasAzules[j][i]=='a')	{setColor(color[6]); cout<<char(220);}
 			else if	(fantasmasAzules[j][i]=='b')	{setColor(color[6]); cout<<char(223);}
 			
-			//PacMan
 			else if	(fantasmasAzules[j][i]=='Y')	{setColor(color[0]); cout<<char(219);}
 			else if	(fantasmasAzules[j][i]=='c')	{setColor(color[0]); cout<<char(220);}
 			else if	(fantasmasAzules[j][i]=='d')	{setColor(color[0]); cout<<char(223);}
 			
-			//Punto
 			else if	(fantasmasAzules[j][i]=='e')	{setColor(color[5]); cout<<char(220);}
 			else if	(fantasmasAzules[j][i]=='f')	{setColor(color[5]); cout<<char(223);}	
 			else{cout<<char();}
@@ -256,14 +225,11 @@ char tablero[29][44] = {
 int  space [29][44];
 int  comida[29][44];
 
-
-//Funcion para LLENAR EL TABLERO (recorre Primero las columnas y luego cada fila)
 void llenarMapa()
 {
      for(int i = 0 ; i < 29 ; i++){
          for(int j = 0 ; j < 43 ; j++){
          	
-         	   //COLOCAR(11+J)(4+I)
                gotoxy(11+j,4+i); 		 
                
                if		(tablero[i][j] == 'x') 	{setColor(color[6]); cout<<char(205);	space[i][j]=1;	comida[i][j]= 2;}
@@ -278,13 +244,10 @@ void llenarMapa()
 			   else if	(tablero[i][j] == '+') 	{setColor(color[5]); cout<<char(250); 	space[i][j]=2;  comida[i][j]= 1;}		   			   	
          }
      }
-	//Valor para Pasadizo
     space[13][0]  = 3;
 	space[13][42] = 3;
-	//space[13][26] = 5;
+	
 }
-
-	/*===================================  IMPRIMIR MATRICES NO VISIBLES  ===================================*/
 
 
 void imprimirSpace(){
@@ -292,7 +255,7 @@ void imprimirSpace(){
 	
 	for(int i = 0 ; i < 29 ; i++){
          for(int j = 0 ; j < 43 ; j++){
-         	gotoxy(11+j,4+i);							//COLOCAR(11+J)(4+I)
+         	gotoxy(11+j,4+i);						
          	
          		if(space[i][j]==0)
          		{
@@ -320,16 +283,14 @@ void teclearMenu(){
     opcion = getch();
     switch(opcion){
       case UNO:
-         dirMenu = 1;	//Jugar
+         dirMenu = 1;	
          break;
 
-      case DOS:	   //Salir	  
+      case DOS:	    
       	dirMenu  = 2;
       	  break;
 	}
 }
-
-//Funcion TECLAS EN JUEGO
 void teclear(){
     if(kbhit()){
       tecla = getch();
@@ -358,8 +319,6 @@ void teclear(){
 }
 	
 
-
-//Funcion para MENU PRINCIPAL
 void menu(){
 		
 	llenarTitulo();
@@ -385,9 +344,6 @@ void menu(){
 	}
 	
 }
-
-	/*===================================  MARCADOR FIJO  ===================================*/
-
 void marcadorFijo(){
 	
 	setColor(color[0]);
@@ -407,31 +363,20 @@ void marcadorFijo(){
 	cout<<"LIVES";
 
 }
-
-	/*================================== MARCADOR CAMBIABLE ==================================*/
-
 void marcador(){
 	
-	//Puntos
 	gotoxy(18,2);
 	setColor(color[0]);
 	cout<<puntos;
 	
-	//Vidas
-	
 	gotoxy(19,34);
 	cout<<vida<<" < ";
 
-	//Nivel
-		
 	gotoxy(29,3);
 	cout<<"LEVEN "<<nivel;
 	
 }
 
-	/*=====================================  PACMAN  =====================================*/
-
-// Funcion para IMPRIMIR PAC-MAN
 void imprimirPacman(int i , int j){
     setColor(color[0]);
     
@@ -443,15 +388,11 @@ void imprimirPacman(int i , int j){
 	gotoxy(11+i,4+j); cout<<tablero[i][j];
 				
 }
-
-// Funcion para BORRAR PAC-MAN
 void borrarPacman(int i, int j){
      tablero[i][j]=32; 
      gotoxy(11+i,4+j);cout<<tablero[i][j];
 }
 
-
-// Funcion para los PUNTOS DE COMIDA
 void puntosComida(int i, int j){
 	
 	if(dir==0 && comida[j-1][i]==1){
@@ -473,7 +414,6 @@ void puntosComida(int i, int j){
 	}
 }
 
-// Funcion MOVER ARRIBA PAC-MAN
 void movArribaPacman(int &i, int &j){
 	
 	if (dir == 0  && ( space[j-1][i] == 0  || space[j-1][i] == 2 ) ){
@@ -484,7 +424,6 @@ void movArribaPacman(int &i, int &j){
 	}
 }
 
-//Funcion MOVER DERECHA PAC-MAN
 void movAbajoPacman(int &i, int &j){
 	
 	if (dir == 1 && (space[j+1][i] == 0 || space[j+1][i] == 2 )){	
@@ -495,7 +434,6 @@ void movAbajoPacman(int &i, int &j){
 	}
 }
 
-// Funcion para MOVER IZQUIERDA PAC-MAN
 void movIzquierdaPacman(int &i, int &j){
 	
 	if (dir == 3  && (space[j][i-1] == 0 || space[j][i-1] == 2  || space[j][i-1] == 3)){
@@ -506,7 +444,6 @@ void movIzquierdaPacman(int &i, int &j){
 	}
 }
 
-// Funcion para MOVER DERECHA PAC-MAN
 void movDerechaPacman(int &i, int &j){
 	
 	if (dir == 2 && (space[j][i+1] == 0 || space[j][i+1] == 2 || space[j][i+1] == 3)){
@@ -517,7 +454,6 @@ void movDerechaPacman(int &i, int &j){
 	}
 }
 
-// Funcion para MOVER PASADIZO IZQUIERDO PAC-MAN
 void movPasadizoIzq(int &i, int &j)
 {
 	if(i == 0){
@@ -527,7 +463,6 @@ void movPasadizoIzq(int &i, int &j)
 	}
 }
 
-// Funcion para MOVER PASADIZO DERECHO PAC-MAN
 void movPasadizoDer(int &i, int &j)
 {
 	if(i == 42){		
@@ -537,37 +472,24 @@ void movPasadizoDer(int &i, int &j)
 	}
 }
 
-// Funcion Mover Pacman
 void mover(int &i, int &j)
 {
-			//Movimiento para Arriba
 		movArribaPacman		(i,j);
 		
-			//Movimiento para Abajo
 		movAbajoPacman		(i,j);
 		
-			//Movimiento para la Izquierda
 		movIzquierdaPacman	(i,j);
 		
-			//Movimiento para la Derecha
 		movDerechaPacman	(i,j);
 		
 		imprimirPacman(i,j);
 		Sleep(100);
 		
-			//Movimiento por el pasadizo. Pasadizo por la izquierda
 		movPasadizoIzq		(i,j);
 		
-			//Movimiento por el pasadizo. Pasadizo por la derecha
 		movPasadizoDer		(i,j);
 
 }
-	
-	/*=====================================  FANTASMAS  =====================================*/
-
-	/*=======================================  CLYDE  =======================================*/
-
-// Funcion para IMPRIMIR CLYDE
 void imprimirClyde(int iC , int jC)
 {
 	setColor(color[4]);
@@ -575,13 +497,9 @@ void imprimirClyde(int iC , int jC)
 	gotoxy(11+iC,4+jC); cout<<tablero[iC][jC];
 	
 }
-
-//Hay veces en que deja una moneda sin imprimir, en movimientos horizontales, remplazar los borrarClyde por esta funcion para ver los errores
-
-// Funcion para REIMPRIMIR COMIDA detras de CLYDE
 void  imprimirComidaClyde(int iC, int jC, char movClyde){
 	
-	if(movClyde == UP){						//BUENA
+	if(movClyde == UP){						
 		if(comida[jC+1][iC]== 1){
 			setColor(color[7]);
 			gotoxy(11+iC,4+(jC+1)); cout<<char(250);
@@ -592,7 +510,7 @@ void  imprimirComidaClyde(int iC, int jC, char movClyde){
 		}
 	}
 	
-	else if(movClyde == DOWN){				//BUENA
+	else if(movClyde == DOWN){				
 		if(comida[jC-1][iC]== 1){
 			setColor(color[7]);
 			gotoxy(11+iC,4+(jC-1)); cout<<char(250);
@@ -626,8 +544,6 @@ void  imprimirComidaClyde(int iC, int jC, char movClyde){
 		}
 	}
 }
-
-// Funcion para BORRAR CLYDE
 void borrarClyde(int iC, int jC){ 
 
 	setColor(color[5]); 
@@ -635,8 +551,6 @@ void borrarClyde(int iC, int jC){
     gotoxy(11+iC,4+jC); 
 	cout<<tablero[iC][jC];	
 }
-
-// Funcion RANDOM CLYDE
 void randomClyde(int &movClydeAux, char &movClyde){
 	
 	movClydeAux = rand()%4;
@@ -647,12 +561,8 @@ void randomClyde(int &movClydeAux, char &movClyde){
 	else if (movClydeAux == 3){movClyde = RIGHT;}
 	
 }
-
-//Funcion CHOQUE CLYDE - PACMAN
-	//ARREGLAR
 void choqueClyde(int &i, int &j, int &iC, int &jC, int &dir, char movClyde, int anteriorpi, int anteriorpj){
 	
-	//if(i == iC && j == jC )
 	
 	if( i == iC && j == jC || (movClyde == UP && dir == 1 || movClyde == DOWN && dir == 0 || movClyde == LEFT && dir == 3 || movClyde == RIGHT && dir == 2 ) && (jC == anteriorpj && iC == anteriorpi))
 	{
@@ -669,8 +579,6 @@ void choqueClyde(int &i, int &j, int &iC, int &jC, int &dir, char movClyde, int 
 		vida = vida-1;
 	}
 }
-
-// Funcion MOVER ARRIBA CLYDE
 void movArribaClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 	
 	if (movClyde==UP){
@@ -689,7 +597,6 @@ void movArribaClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 	}
 }
 
-// Funcion MOVER ABAJO CLYDE
 void movAbajoClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 	
 	if (movClyde==DOWN ){
@@ -709,7 +616,6 @@ void movAbajoClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 	}
 }
 
-// Funcion MOVER IZQUIERDA CLYDE
 void movIzquierdaClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 	
 	if (movClyde==LEFT ){
@@ -733,8 +639,6 @@ void movIzquierdaClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 		}
 	}
 }
-
-// Funcion MOVER DERECHA CLYDE
 void movDerechaClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 	
 	if (movClyde==RIGHT){
@@ -753,30 +657,20 @@ void movDerechaClyde(int &iC, int &jC, int &movClydeAux, char &movClyde){
 		}
 	}
 }
-
-// Funcion MOVER CLYDE
 void moverClyde(int &iC, int &jC, char &movClyde,int &movClydeAux){
 	
-		//Mover Arriba Clyde
 	movArribaClyde		(iC,jC, movClydeAux, movClyde);
 	
-		//Mover Abajo Clyde
 	movAbajoClyde		(iC,jC, movClydeAux, movClyde);
 	
-		//Mover Izquierda Clyde
 	movIzquierdaClyde	(iC,jC, movClydeAux, movClyde);
 	
-		//Mover Derecha
 	movDerechaClyde(iC,jC, movClydeAux, movClyde);
 	
 	
 	imprimirClyde(iC,jC);
 	imprimirComidaClyde(iC,jC,movClyde);
 }
-
-	/*=======================================  BLINKY  =======================================*/
-
-//Funcion IMPRIMIR BLINKY
 void imprimirBlinky(int iB , int jB)
 {
 	setColor(color[1]);
@@ -784,8 +678,6 @@ void imprimirBlinky(int iB , int jB)
 	gotoxy(11+iB,4+jB); cout<<tablero[iB][jB];
 	
 }
-
-// Funcion BORRAR BLINKY
 void borrarBlinky(int iB, int jB){ 
 
 	setColor(color[5]); 
@@ -794,7 +686,6 @@ void borrarBlinky(int iB, int jB){
 	cout<<tablero[iB][jB];	
 }
 
-// Funcion MOVER IZQUIERDA BLINKY
 void movIzquierdaBlinky(int &iB, int &jB, int i, int j){
 
 	if(i<iB){
@@ -804,14 +695,12 @@ void movIzquierdaBlinky(int &iB, int &jB, int i, int j){
 		}
 		else if (space[jB][iB-1] == 1){
 			
-			//Igual a rutina movArribaBlinky
 			if(j<jB){
 				if(space[jB-1][iB] == 0 || space[jB-1][iB] == 2){
 					borrarClyde(iB,jB);
 					jB=jB-1;
 				}
 			}
-			//Igual a rutina movAbajoBlinky
 			else if(j>jB){
 				if(space[jB+1][iB] == 0 || space[jB+1][iB] == 2){
 					borrarClyde(iB,jB);
@@ -822,7 +711,6 @@ void movIzquierdaBlinky(int &iB, int &jB, int i, int j){
 	}
 }
 
-// Funcion MOVER DERECHA BLINKY
 void movDerechaBlinky(int &iB, int &jB, int i, int j){
 
 	if(i>iB){
@@ -832,14 +720,12 @@ void movDerechaBlinky(int &iB, int &jB, int i, int j){
 		}
 		else if (space[jB][iB+1] == 1){
 			
-			//Igual a rutina movArribaBlinky
 			if(j<jB){
 				if(space[jB-1][iB] == 0 || space[jB-1][iB] == 2){
 					borrarClyde(iB,jB);
 					jB=jB-1;
 				}
 			}
-			//Igual a rutina movAbajoBlinky
 			else if(j>jB){
 				if(space[jB+1][iB] == 0 || space[jB+1][iB] == 2){
 					borrarClyde(iB,jB);
@@ -850,7 +736,6 @@ void movDerechaBlinky(int &iB, int &jB, int i, int j){
 	}
 }
 
-// Funcion MOVER ARRIBA BLINKY
 void movArribaBlinky(int &iB, int &jB, int i, int j){
 
 	if(j<jB){
@@ -865,7 +750,6 @@ void movArribaBlinky(int &iB, int &jB, int i, int j){
 	}
 }
 
-// Funcion MOVER ABAJO BLYNKY
 void movAbajoBlinky(int &iB, int &jB, int i, int j){
 
 	if(j>jB){
@@ -880,23 +764,20 @@ void movAbajoBlinky(int &iB, int &jB, int i, int j){
 	}
 }
 
-// Funcion MOVER BLINKY
 void moverBlinky(int &iB, int &jB, int i, int j, int dir){
 	
 	
-	
-		//Mover Arriba Blinky
 	movArribaBlinky(iB, jB, i, j);
 	
-		//Mover Abajo Blinky
+		
 	movAbajoBlinky(iB, jB, i, j);
 	
 	if(j==jB)
 	{
-			//Mover Izquierda Blinky
+			
 		movIzquierdaBlinky(iB, jB, i, j);
 		
-			//Mover Derecha Blinky
+			
 		movDerechaBlinky(iB, jB, i, j);
 	}
 	
@@ -904,9 +785,6 @@ void moverBlinky(int &iB, int &jB, int i, int j, int dir){
 	
 }
 
-	/*=======================================  PINKY  =======================================*/
-
-// Funcion Imprimir Pinky
 void imprimirPinky(int iP , int jP)
 {
 	setColor(color[2]);
@@ -915,9 +793,6 @@ void imprimirPinky(int iP , int jP)
 	
 }
 
-	/*=======================================  INKY  =======================================*/
-
-// Funcion Imprimir Inky
 void imprimirInky(int iI , int jI)
 {
 	setColor(color[3]);
@@ -926,9 +801,6 @@ void imprimirInky(int iI , int jI)
 	
 }
 
-	/*========================  PANTALLAS DE GANAR Y PERDER  ======================== */
-
-//Pantalla de GANAR
 void menuYouWin(){
 	
 	system("cls");
@@ -964,7 +836,7 @@ void menuYouWin(){
 	cin>>respuesta;
 }
 
-//Pantalla de PERDER
+
 void menuYouLose(){
 	
 	system("cls");
@@ -1000,42 +872,32 @@ void menuYouLose(){
 }
 
 
-	/*=================================  CUERPO PRINCIPAL  ==================================*/
 
 main()
 {
-	/*===========  VARIABLES ===========*/
 	
-	// Variable Posicion Inicial Pacman	
-	
-		//i=Columna j=Fila
 	int  i  = 21 ,  j  = 21;
 	
 	int anteriorpi, anteriorpj;
-		
-	// Variables Posicion Inicial Fantasmas	
-	
-		//i=Columna j=Fila
-	int   iC = 26 ,  jC = 13;	//iC,jC ----> Clyde
-	int   iB = 21 ,  jB = 11; 	//iB,jB ----> BLinky
-	int   iP = 19 ,  jP = 13;	//iP,jP ----> Pinky
-	int   iI = 23 ,  jI = 13;	//iI,jI ----> Inky
+
+	int   iC = 26 ,  jC = 13;	
+	int   iB = 21 ,  jB = 11; 	
+	int   iP = 19 ,  jP = 13;	
+	int   iI = 23 ,  jI = 13;	
 	
 		
 	int hacerClyde  = 0;
 	int hacerBlinky = 0;
 
-	// Variables Movimiento Clyde
 	char  movClyde ;
 	int   movClydeAux;
 	
-	// Variable de Ciclo Juego
 	bool game_over = false;
 	
 	ocultarCursor();
 	
 	while(respuesta == 's' || respuesta == 'S'){
-		//Menu
+		
 		menu();
 		
 		if(dirMenu == 1 || dirMenu == 2 || dirMenu ==3)
@@ -1044,46 +906,33 @@ main()
 			llenarMapa();
 			marcadorFijo();
 			
-			/*=========== Impreciones de Matrices no Visibles ===========*/
-			
-				//imprimirSpace();
-				//imprimirComida();
-					
-			/*===========  Impreciones Iniciales de Fantasmas y Pacman  ===========*/
 			
 			imprimirPacman	(i,j);
 			imprimirClyde	(iC,jC);
 			imprimirBlinky	(iB,jB);
-				//imprimirPinky	(iP,jP);
-				//imprimirInky	(iI,jI);
-		
+				
 			randomClyde(movClydeAux, movClyde);
-			
-			/*===========  Imprimir Sonido Inicial  ===========*/
-	
+		
 			gotoxy(0,0);
 cout<<((LPCSTR)soundPacManInicio,NULL, SND_FILENAME | SND_ASYNC ); 
 			gotoxy(0,0);
 			cout<<" ";
 			Sleep(4700);
 			
-			/*=========== Ciclo de Juego ===========*/
-			
 			while (game_over == false && vida>0 && dir != 4 && puntos<18600){
 				
-				//Reinicializar al pasar de nivel
 				if(puntos == 3320 || puntos == 7140 || puntos == 10960 || puntos == 14780){
-					puntos = puntos + 500 + 20; //Los 20 son del punto del lugar donde se encuentra el pcmn
-					nivel  = nivel  + 1;
+					puntos = puntos + 500 + 20; 
+                    	nivel  = nivel  + 1;
 					vida   = vida   + 3;
 					dir    = 0;
 					
 					i  = 21 ,  j  = 21;
 			
-					iC = 26 ,  jC = 13;	//iC,jC ----> Clyde
-					iB = 21 ,  jB = 11; //iB,jB ----> BLinky
-					iP = 19 ,  jP = 13;	//iP,jP ----> Pinky
-					iI = 23 ,  jI = 13;	//iI,jI ----> Inky
+					iC = 26 ,  jC = 13;	
+					iB = 21 ,  jB = 11; 
+					iP = 19 ,  jP = 13;	
+					iI = 23 ,  jI = 13;	
 					
 					hacerClyde  = 0;
 					hacerBlinky = 0;
@@ -1133,7 +982,6 @@ cout<<((LPCSTR)soundPacManInicio,NULL, SND_FILENAME | SND_ASYNC );
 					Sleep(2500);
 				}
 				
-				//Aca comienza el ciclo 
 				anteriorpi = i; anteriorpj = j;
 				
 				teclear();
@@ -1170,7 +1018,6 @@ cout<<((LPCSTR)soundPacManInicio,NULL, SND_FILENAME | SND_ASYNC );
 		{
 			system("cls");
 			
-			//reinicializacion de todo
 			puntos  = 20;
 			nivel   = 1;
 			vida    = 3;
@@ -1183,10 +1030,10 @@ cout<<((LPCSTR)soundPacManInicio,NULL, SND_FILENAME | SND_ASYNC );
 			
 			i  = 21 ,  j  = 21;
 	
-			iC = 26 ,  jC = 13;	//iC,jC ----> Clyde
-			iB = 21 ,  jB = 11; //iB,jB ----> BLinky
-			iP = 19 ,  jP = 13;	//iP,jP ----> Pinky
-			iI = 23 ,  jI = 13;	//iI,jI ----> Inky
+			iC = 26 ,  jC = 13;	
+			iB = 21 ,  jB = 11; 
+			iP = 19 ,  jP = 13;	
+			iI = 23 ,  jI = 13;	
 			
 			hacerClyde  = 0;
 			hacerBlinky = 0;
