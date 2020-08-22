@@ -192,7 +192,7 @@ void inicializarArreglo()
 void snake() {
 	
 	int opcion = 0;
-	system ("color 64");
+	system ("color 0B");
 
 	while (true){
  
