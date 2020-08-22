@@ -3,6 +3,7 @@
  #include "pacman.h"
  #include "menu.h"
  #include "nave.h"
+ #include <stdio.h>
  
  using namespace std;
 
@@ -11,8 +12,7 @@
      while (salir == false){
 
     int opcion = 0;
-
-  
+    system("color 0B");
 		cout << "&&&&&&&&&&&&&&&&&&&&&&&&&" << endl;
 		cout << "&& MENU DE JUEGOS SOLI &&" << endl;
 		cout << "&&&&&&&&&&&&&&&&&&&&&&&&&" << endl;

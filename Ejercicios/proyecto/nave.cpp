@@ -15,17 +15,10 @@ using namespace std;
 #define DERECHA 77
 #define ABAJO 80
 
-/* Ojo falta documentar :O*/
-/* Ojo en propiedades - vinculador - entrada 
-   agregar winmm.lib para la musica
-*/
-
 void gotoxy(int x, int y)
 {
 	HANDLE hCon;
-	//Recupera el control de la consola
 	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
-	//Son coodenadas
 	COORD dwPos;
 	dwPos.X = x;
 	dwPos.Y = y;
@@ -270,7 +263,7 @@ void nave()
 				
 			}
 		}
-		//Disparo
+		
 		for (it = B.begin() ; it != B.end() ;)
 		{
 			(*it)->mover();
@@ -291,7 +284,7 @@ void nave()
 			(*itA)->mover();
 			(*itA)->colisionNave(n);
 		}
-		//Colision Bala - Asteroide
+		
 		for (itA = A.begin(); itA != A.end();itA++)
 		{
 			for (it = B.begin(); it != B.end();)
