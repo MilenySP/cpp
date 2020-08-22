@@ -20,7 +20,7 @@ int cuerpo[200][2];
 int n=1;
 int tam = 3;
 int x=10, y=12;
-int dir=3;
+int dirSnake=3;
 int xc=30, yc=20;
 int xxc= 40, yyc=18;
 int d;
@@ -52,7 +52,7 @@ void inicializarArreglo()
 		system("cls");
 	}
 
-	void gotoxy(int x,int y)
+	void gotoxySnake(int x,int y)
 	{
 		HANDLE hCon;
 		hCon=GetStdHandle(STD_OUTPUT_HANDLE);
@@ -67,24 +67,24 @@ void inicializarArreglo()
 	void pintar()
 	{
 		for(int i=2; i<78;i++){
-			gotoxy(i,3);cout<<(char)205;
-			gotoxy(i,23);cout<<(char)205;	
+			gotoxySnake(i,3);cout<<(char)205;
+			gotoxySnake(i,23);cout<<(char)205;	
 		}
 		for(int i=4;i<23;i++){
-			gotoxy(2,i); cout<<(char)186;
-			gotoxy(77,i); cout<<(char)186;
+			gotoxySnake(2,i); cout<<(char)186;
+			gotoxySnake(77,i); cout<<(char)186;
 		}
-		gotoxy(2,3);cout<<(char)201;
-		gotoxy(2,23);cout<<(char)200;
-		gotoxy(77,3);cout<<(char)187;
-		gotoxy(77,23);cout<<(char)188;
+		gotoxySnake(2,3);cout<<(char)201;
+		gotoxySnake(2,23);cout<<(char)200;
+		gotoxySnake(77,3);cout<<(char)187;
+		gotoxySnake(77,23);cout<<(char)188;
 		
 	}
 
 	void dibujarcuerpo()
 	{
 		for(int i=1; i<tam;i++){
-			gotoxy(cuerpo[i][0],cuerpo[i][1]); cout<<"@";
+			gotoxySnake(cuerpo[i][0],cuerpo[i][1]); cout<<"@";
 		}
 	}
 
@@ -100,7 +100,7 @@ void inicializarArreglo()
 
 	void borrarcuerpo()
 	{
-			gotoxy(cuerpo[n][0],cuerpo[n][1]); cout<<" ";
+			gotoxySnake(cuerpo[n][0],cuerpo[n][1]); cout<<" ";
 			guardarposicion();
 		}
 
@@ -110,16 +110,16 @@ void inicializarArreglo()
 			tecla=getch();
 			switch(tecla){
 				case ARRIBA:
-				if (dir !=2){dir=1;}
+				if (dirSnake !=2){dirSnake=1;}
 				break;
 				case ABAJO:
-				if(dir != 1 ){dir=2;}
+				if(dirSnake != 1 ){dirSnake=2;}
 				break;
 				case IZQUIERDA:
-				if (dir != 3){dir=4;}
+				if (dirSnake != 3){dirSnake=4;}
 				break;
 				case DERECHA:
-				if (dir != 4){dir=3;}
+				if (dirSnake != 4){dirSnake=3;}
 				break;	
 			}
 		}
@@ -134,9 +134,9 @@ void inicializarArreglo()
 			srand((unsigned)time(NULL));
 			yc=(rand()% 19)+4;
 			tam++;
-			gotoxy(xc,yc); cout<<(char)4;
+			gotoxySnake(xc,yc); cout<<(char)4;
 			Puntos++;
-			gotoxy(50,2);cout<<Puntos;
+			gotoxySnake(50,2);cout<<Puntos;
 		}
 		
 	}
@@ -154,19 +154,19 @@ void inicializarArreglo()
 	{
 		tiempo=tiempo+0.05;
 		int tiempo2=tiempo;
-		gotoxy(35,2);cout<<tiempo;
+		gotoxySnake(35,2);cout<<tiempo;
 		if (x==xxc && y== yyc){
 			srand((unsigned)time(NULL));
 			xxc=(rand()%73)+4;
 			srand((unsigned)time(NULL));
 			yyc=(rand()%19)+4;
 			Puntos=Puntos+5;
-			gotoxy(50,2);cout<<Puntos;
+			gotoxySnake(50,2);cout<<Puntos;
 		}
 		if (tiempo2 %10==0){
-			gotoxy(xxc,yyc); cout<<(char)6;	
+			gotoxySnake(xxc,yyc); cout<<(char)6;	
 		} else if (tiempo2 %15==0){
-			gotoxy(xxc,yyc); cout<<" ";
+			gotoxySnake(xxc,yyc); cout<<" ";
 			srand((unsigned)time(NULL));
 			xxc=(rand()%73)+4;
 			srand((unsigned)time(NULL));
@@ -182,9 +182,45 @@ void inicializarArreglo()
 		puntosx();
 		Teclear(tecla);
 		Teclear(tecla);
-		if (dir==1){y--;}
-		if (dir==2){y++;}
-		if (dir==3){x++;}
-		if (dir==4){x--;}
+		if (dirSnake==1){y--;}
+		if (dirSnake==2){y++;}
+		if (dirSnake==3){x++;}
+		if (dirSnake==4){x--;}
 		Sleep(dif);
 	}
+	
+void snake() {
+	
+	int opcion = 0;
+	system ("color 64");
+
+	while (true){
+ 
+	char tecla;
+	int puntos=0;
+	int xPos=30, yPos=20;
+	
+	inicializarArreglo();
+	dificultad();	
+	gotoxySnake(50,2);
+	cout << puntos;
+	pintar();
+	gotoxySnake(xPos, yPos);
+        cout<<(char)4;	
+	
+	while(tecla != 27 && gameover() )
+    {
+	    proceso(tecla, puntos);
+	}
+	
+	if (!gameover())
+    {
+        MessageBoxA(NULL, "haz perdido","perdedor",MB_OK);
+        system("cls");
+    }
+	}
+	
+	system("pause>NULL");
+	cout << "Saliste del sistema";
+		
+}	

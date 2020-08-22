@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 #include "pacman.h"
+#include "menu.h"
 
 #define UP     	72  
 #define DOWN    80
@@ -41,7 +42,7 @@ int color[8] = {
 };
 
 
-void gotoxy(int x,int y){  
+void gotoxyPacman(int x,int y){  
 	HANDLE hCon;
 	
 	hCon = GetStdHandle(STD_OUTPUT_HANDLE);  
@@ -102,7 +103,7 @@ void llenarTitulo()
 	{
 		for(int j=0; j<6; j++)
 		{
-			gotoxy(12+i,5+j);
+			gotoxyPacman(12+i,5+j);
 			if		(titulo[j][i]=='P'){setColor(color[0]);cout<<char(219);}
 			else if (titulo[j][i]=='O'){setColor(color[0]);cout<<char(223);}
 			else if (titulo[j][i]=='Q'){setColor(color[0]);cout<<char(220);}
@@ -116,7 +117,7 @@ void llenarFantasmas()
 	{
 		for(int j=0; j<4; j++)
 		{
-			gotoxy(14+i,25+j);
+			gotoxyPacman(14+i,25+j);
 			
 			if		(tituloFantasmas[j][i]=='X')	{setColor(color[1]); cout<<char(219);}
 			else if	(tituloFantasmas[j][i]=='a')	{setColor(color[1]); cout<<char(220);}
@@ -148,7 +149,7 @@ void llenarTeclado()
 	{
 		for(int j=0; j<6; j++)
 		{
-			gotoxy(40+i,22+j);
+			gotoxyPacman(40+i,22+j);
 			if(teclado[j][i]=='a')			{setColor(color[0]);cout<<char(201);}
 			else if (teclado[j][i]=='b')	{setColor(color[0]);cout<<char(187);}
 			else if (teclado[j][i]=='c')	{setColor(color[0]);cout<<char(200);}					
@@ -170,7 +171,7 @@ void llenarFantasmasAzules()
 	{
 		for(int j=0; j<4; j++)
 		{
-			gotoxy(14+i,30+j);
+			gotoxyPacman(14+i,30+j);
 			
 			if		(fantasmasAzules[j][i]=='X')	{setColor(color[6]); cout<<char(219);}
 			else if	(fantasmasAzules[j][i]=='a')	{setColor(color[6]); cout<<char(220);}
@@ -229,7 +230,7 @@ void llenarMapa()
      for(int i = 0 ; i < 29 ; i++){
          for(int j = 0 ; j < 43 ; j++){
          	
-               gotoxy(11+j,4+i); 		 
+               gotoxyPacman(11+j,4+i); 		 
                
                if		(tablero[i][j] == 'x') 	{setColor(color[6]); cout<<char(205);	space[i][j]=1;	comida[i][j]= 2;}
                else if	(tablero[i][j] == '_') 	{setColor(color[7]); cout<<char(250);	space[i][j]=0;	comida[i][j]= 1;}
@@ -254,7 +255,7 @@ void imprimirSpace(){
 	
 	for(int i = 0 ; i < 29 ; i++){
          for(int j = 0 ; j < 43 ; j++){
-         	gotoxy(11+j,4+i);						
+         	gotoxyPacman(11+j,4+i);						
          	
          		if(space[i][j]==0)
          		{
@@ -318,17 +319,17 @@ void teclear(){
 }
 	
 
-void menu(){
+void menus(){
 		
 	llenarTitulo();
 	llenarFantasmas();
 	
 	setColor(color[5]);
-	gotoxy(21,15);
+	gotoxyPacman(21,15);
 	cout<<"1.  Empezar a jugar";
-	gotoxy(21,17);
+	gotoxyPacman(21,17);
 	cout<<"2.  salir";
-	gotoxy(21,19);
+	gotoxyPacman(21,19);
 	
 	
 	teclearMenu();	
@@ -347,31 +348,31 @@ void marcadorFijo(){
 	
 	setColor(color[0]);
 	
-	gotoxy(29,1);
+	gotoxyPacman(29,1);
 	cout<<"PAC-MAN";
-	gotoxy(0,36);
+	gotoxyPacman(0,36);
 	
 	
 	setColor(color[5]);
 	
-	gotoxy(12,2);
+	gotoxyPacman(12,2);
 	cout<<"SCORE";
-	gotoxy(43,2);
+	gotoxyPacman(43,2);
 	cout<<"TIME";
-	gotoxy(12,34);
+	gotoxyPacman(12,34);
 	cout<<"LIVES";
 
 }
 void marcador(){
 	
-	gotoxy(18,2);
+	gotoxyPacman(18,2);
 	setColor(color[0]);
 	cout<<puntos;
 	
-	gotoxy(19,34);
+	gotoxyPacman(19,34);
 	cout<<vida<<" < ";
 
-	gotoxy(29,3);
+	gotoxyPacman(29,3);
 	cout<<"LEVEN "<<nivel;
 	
 }
@@ -384,12 +385,12 @@ void imprimirPacman(int i , int j){
 	else if	(dir==2)	{ tablero[i][j]=60; }
 	else if	(dir==3)	{ tablero[i][j]=62; }
     
-	gotoxy(11+i,4+j); cout<<tablero[i][j];
+	gotoxyPacman(11+i,4+j); cout<<tablero[i][j];
 				
 }
 void borrarPacman(int i, int j){
      tablero[i][j]=32; 
-     gotoxy(11+i,4+j);cout<<tablero[i][j];
+     gotoxyPacman(11+i,4+j);cout<<tablero[i][j];
 }
 
 void puntosComida(int i, int j){
@@ -493,7 +494,7 @@ void imprimirClyde(int iC , int jC)
 {
 	setColor(color[4]);
 	tablero[iC][jC] = 67;
-	gotoxy(11+iC,4+jC); cout<<tablero[iC][jC];
+	gotoxyPacman(11+iC,4+jC); cout<<tablero[iC][jC];
 	
 }
 void  imprimirComidaClyde(int iC, int jC, char movClyde){
@@ -501,22 +502,22 @@ void  imprimirComidaClyde(int iC, int jC, char movClyde){
 	if(movClyde == UP){						
 		if(comida[jC+1][iC]== 1){
 			setColor(color[7]);
-			gotoxy(11+iC,4+(jC+1)); cout<<char(250);
+			gotoxyPacman(11+iC,4+(jC+1)); cout<<char(250);
 		}
 		else if(comida[jC+1][iC]== 0){
 			setColor(color[7]);
-			gotoxy(11+iC,4+(jC+1)); cout<<char(32);
+			gotoxyPacman(11+iC,4+(jC+1)); cout<<char(32);
 		}
 	}
 	
 	else if(movClyde == DOWN){				
 		if(comida[jC-1][iC]== 1){
 			setColor(color[7]);
-			gotoxy(11+iC,4+(jC-1)); cout<<char(250);
+			gotoxyPacman(11+iC,4+(jC-1)); cout<<char(250);
 		}
 		else if(comida[jC-1][iC]== 0){
 			setColor(color[7]);
-			gotoxy(11+iC,4+(jC-1)); cout<<char(32);
+			gotoxyPacman(11+iC,4+(jC-1)); cout<<char(32);
 		}
 		
 	}
@@ -524,22 +525,22 @@ void  imprimirComidaClyde(int iC, int jC, char movClyde){
 	else if(movClyde == LEFT){
 		if(comida[jC][iC+1]== 1){
 			setColor(color[7]);
-			gotoxy(11+(iC+1),4+jC); cout<<char(250);
+			gotoxyPacman(11+(iC+1),4+jC); cout<<char(250);
 		}
 		else if(comida[jC][iC+1]== 0){
 			setColor(color[7]);
-			gotoxy(11+(iC+1),4+jC); cout<<char(32);
+			gotoxyPacman(11+(iC+1),4+jC); cout<<char(32);
 		}
 	}
 	
 	else if(movClyde == RIGHT){
 		if(comida[jC][iC-1]== 1){
 			setColor(color[7]);
-			gotoxy(11+(iC-1),4+jC); cout<<char(250);
+			gotoxyPacman(11+(iC-1),4+jC); cout<<char(250);
 		}
 		else if(comida[jC][iC-1]== 0){
 			setColor(color[7]);
-			gotoxy(11+(iC-1),4+jC); cout<<char(32);
+			gotoxyPacman(11+(iC-1),4+jC); cout<<char(32);
 		}
 	}
 }
@@ -547,7 +548,7 @@ void borrarClyde(int iC, int jC){
 
 	setColor(color[5]); 
 	tablero[iC][jC] = 32; 
-    gotoxy(11+iC,4+jC); 
+    gotoxyPacman(11+iC,4+jC); 
 	cout<<tablero[iC][jC];	
 }
 void randomClyde(int &movClydeAux, char &movClyde){
@@ -567,7 +568,7 @@ void choqueClyde(int &i, int &j, int &iC, int &jC, int &dir, char movClyde, int 
 	{
 		if(comida[i][j]==0)
 		{
-			gotoxy(11+i,4+j); cout<<char(32);
+			gotoxyPacman(11+i,4+j); cout<<char(32);
 		}
 		
 		i  = 21;
@@ -674,14 +675,14 @@ void imprimirBlinky(int iB , int jB)
 {
 	setColor(color[1]);
 	tablero[iB][jB] = 66;
-	gotoxy(11+iB,4+jB); cout<<tablero[iB][jB];
+	gotoxyPacman(11+iB,4+jB); cout<<tablero[iB][jB];
 	
 }
 void borrarBlinky(int iB, int jB){ 
 
 	setColor(color[5]); 
 	tablero[iB][jB] = 32; 
-    gotoxy(11+iB,4+jB); 
+    gotoxyPacman(11+iB,4+jB); 
 	cout<<tablero[iB][jB];	
 }
 
@@ -788,7 +789,7 @@ void imprimirPinky(int iP , int jP)
 {
 	setColor(color[2]);
 	tablero[iP][jP] = 80;
-	gotoxy(11+iP,4+jP); cout<<tablero[iP][jP];
+	gotoxyPacman(11+iP,4+jP); cout<<tablero[iP][jP];
 	
 }
 
@@ -796,7 +797,7 @@ void imprimirInky(int iI , int jI)
 {
 	setColor(color[3]);
 	tablero[iI][jI] = 73;
-	gotoxy(11+iI,4+jI); cout<<tablero[iI][jI];
+	gotoxyPacman(11+iI,4+jI); cout<<tablero[iI][jI];
 	
 }
 
@@ -807,31 +808,31 @@ void menuYouWin(){
 	llenarTitulo();
 	llenarFantasmasAzules();
 	
-	gotoxy(28,15);
+	gotoxyPacman(28,15);
 	setColor(color[0]);
 	cout<<"YOU WIN!";
 	
 	
 	setColor(color[0]);
-	gotoxy(13,21);
+	gotoxyPacman(13,21);
 	cout<<"SI QUIERES VOLVER A JUGAR PRECIONA s!";
 	
-	gotoxy(0,36);
+	gotoxyPacman(0,36);
 	cout<<char(184)<<"2017-2018 MDSB";
 	
 	setColor(color[0]);
-	gotoxy(21,18);
+	gotoxyPacman(21,18);
 	cout<<"Su ID ES:     ";
 	setColor(color[5]);
 
 	
 	setColor(color[0]);
-	gotoxy(21,19);
+	gotoxyPacman(21,19);
 	cout<<"Su SCORE ES:  ";
 	setColor(color[5]);
 	cout<<puntos;
 
-	gotoxy(32,23);
+	gotoxyPacman(32,23);
 	cin>>respuesta;
 }
 
@@ -843,36 +844,36 @@ void menuYouLose(){
 	llenarTitulo();
 	llenarFantasmas();
 	
-	gotoxy(27,15);
+	gotoxyPacman(27,15);
 	setColor(color[0]);
 	cout<<"GAME OVER!";
 	
 	setColor(color[0]);
-	gotoxy(10,21);
+	gotoxyPacman(10,21);
 	cout<<"SI QUIERES VOLVER A JUGAR PRECIONA s y ENTER!";
 
-	gotoxy(0,36);
+	gotoxyPacman(0,36);
 	
 	
 	setColor(color[0]);
-	gotoxy(21,18);
+	gotoxyPacman(21,18);
 	cout<<"Su ID ES:     ";
 	setColor(color[5]);
 	
 	
 	setColor(color[0]);
-	gotoxy(21,19);
+	gotoxyPacman(21,19);
 	cout<<"Su SCORE ES:  ";
 	setColor(color[5]);
 	cout<<puntos;
 
-	gotoxy(32,23);
+	gotoxyPacman(32,23);
 	cin>>respuesta;
 }
 
 
 
-main()
+void pacman()
 {
 	
 	int  i  = 21 ,  j  = 21;
@@ -897,7 +898,7 @@ main()
 	
 	while(respuesta == 's' || respuesta == 'S'){
 		
-		menu();
+		menus();
 		
 		if(dirMenu == 1 || dirMenu == 2 || dirMenu ==3)
 		{
@@ -912,9 +913,9 @@ main()
 				
 			randomClyde(movClydeAux, movClyde);
 		
-			gotoxy(0,0);
+			gotoxyPacman(0,0);
             cout<<((LPCSTR)NULL, SND_FILENAME | SND_ASYNC ); 
-			gotoxy(0,0);
+			gotoxyPacman(0,0);
 			cout<<" ";
 			Sleep(4700);
 			
@@ -1072,3 +1073,4 @@ main()
 	}
 	system("pause>nul"); 
 }
+
